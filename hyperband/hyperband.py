@@ -11,7 +11,7 @@ class Hyperband:
 		self.get_params = get_params_function
 		self.try_params = try_params_function
 		
-		self.max_iter = 81  	# maximum iterations per configuration
+		self.max_iter = 5000  	# maximum iterations per configuration
 		self.eta = 3			# defines configuration downsampling rate (default = 3)
 
 		self.logeta = lambda x: log( x ) / log( self.eta )
@@ -45,7 +45,6 @@ class Hyperband:
 				
 				n_configs = n * self.eta ** ( -i )
 				n_iterations = r * self.eta ** ( i )
-				
 				print('{} configurations x {:.1f} iterations each'.format( 
 					n_configs, n_iterations ))
 				

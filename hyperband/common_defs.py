@@ -15,8 +15,6 @@ try:
 except ImportError:
 	print('In order to achieve operational capability, this programme requires hyperopt to be installed (pip install hyperopt), unless you make get_params() use something else.')
 	
-#	
-
 # handle floats which should be integers
 # works with flat params
 def handle_integers( params ):
@@ -30,8 +28,6 @@ def handle_integers( params ):
 	
 	return new_params
 	
-###
-
 def train_and_eval_sklearn_classifier( clf, data ):
 	
 	x_train = data['x_train']
@@ -51,9 +47,7 @@ def train_and_eval_sklearn_classifier( clf, data ):
 	auc = AUC( y_train, p )
 	acc = accuracy( y_train, np.round( p ))
 
-	print "\n# training | log loss: {:.2%}, AUC: {:.2%}, accuracy: {:.2%}".format( ll, auc, acc )
-
-	#
+	print('# training | log loss: {:.2%}, AUC: {:.2%}, accuracy: {:.2%}'.format( ll, auc, acc ))
 
 	try:
 		p = clf.predict_proba( x_test )[:,1]	# sklearn convention
@@ -64,12 +58,10 @@ def train_and_eval_sklearn_classifier( clf, data ):
 	auc = AUC( y_test, p )
 	acc = accuracy( y_test, np.round( p ))
 
-	print "# testing  | log loss: {:.2%}, AUC: {:.2%}, accuracy: {:.2%}".format( ll, auc, acc )	
+	print('# testing  | log loss: {:.2%}, AUC: {:.2%}, accuracy: {:.2%}'.format( ll, auc, acc ))
 	
 	#return { 'loss': 1 - auc, 'log_loss': ll, 'auc': auc }
 	return { 'loss': ll, 'log_loss': ll, 'auc': auc }
-
-###
 
 # "clf", even though it's a regressor
 def train_and_eval_sklearn_regressor( clf, data ):
@@ -88,9 +80,7 @@ def train_and_eval_sklearn_regressor( clf, data ):
 	mae = MAE( y_train, p )
 
 
-	print "\n# training | RMSE: {:.4f}, MAE: {:.4f}".format( rmse, mae )
-
-	#
+	print('\n# training | RMSE: {:.4f}, MAE: {:.4f}'.format( rmse, mae ))
 
 	p = clf.predict( x_test )
 
@@ -98,7 +88,7 @@ def train_and_eval_sklearn_regressor( clf, data ):
 	rmse = sqrt( mse )
 	mae = MAE( y_test, p )
 
-	print "# testing  | RMSE: {:.4f}, MAE: {:.4f}".format( rmse, mae )	
+	print('# testing  | RMSE: {:.4f}, MAE: {:.4f}'.format( rmse, mae ))
 	
 	return { 'loss': rmse, 'rmse': rmse, 'mae': mae }
 
